@@ -1,0 +1,30 @@
+{
+  "name": "json-s-generator",
+  "version": "0.0.1",
+  "description": "Another JSON schema generator writen in TypeScript supporting from JSON Schema draft-07.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "mocha -r ts-node/register test/**/*.spec.ts"
+  },
+  "keywords": [
+    "JSON",
+    "schema",
+    "generator"
+  ],
+  "author": "Alain Daussin",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/lodash": "^4.14.110",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "typescript": "^2.9.2"
+  },
+  "dependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.3",
+    "lodash": "^4.17.10",
+    "ts-node": "^7.0.0"
+  }
+}
