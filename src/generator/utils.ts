@@ -50,9 +50,21 @@ export class Utils {
                 return '';
             case ValueTypeEnum.NULL:
                 return null;
+            case ValueTypeEnum.ARRAY:
+                return [];
+            case ValueTypeEnum.OBJECT:
+                return {};
         }
     }
 
+    /**
+     * Test deep equality between two object with the possibility to omit recursively
+     * some properties.
+     * @param obj1: the first object to compare.
+     * @param obj2: the second object to compare.
+     * @param {string} omits: one or many names of properties to omit recursively.
+     * @return {boolean}: whether the two object are identical or not.
+     */
     static isEqualWithout(obj1: any, obj2: any, ...omits: string[]): boolean {
         if (_.isObject(obj1) && _.isObject(obj2)) {
             const keys = Object.keys(obj1);

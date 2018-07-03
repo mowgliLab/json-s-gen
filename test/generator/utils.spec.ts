@@ -1,10 +1,11 @@
 import { expect } from 'chai';
 import { describe,it } from 'mocha';
 import { Utils } from '../../src/generator/utils';
+import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 
 describe('#Utils', () => {
 
-    describe(' getType(value)', () => {
+    describe('getType(value)', () => {
         it('Should return string', () => {
             const result = Utils.getType('coucou');
             expect(result).to.equal('string');
@@ -295,6 +296,44 @@ describe('#Utils', () => {
             };
             const result = Utils.isEqualWithout(obj1, obj2, 'values', 'default');
             expect(result).to.be.equal(true);
+        });
+    });
+
+    describe('getJson(filePath)', () => {
+        it('should read existing well formed file and return proper js object');
+        it('should read non existing file');
+        it('should read existing not JSON file');
+        it('should read existing well formed file from another context');
+    });
+
+    describe('getDefaultValue(type)', () => {
+        it('Test boolean type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.BOOLEAN);
+            expect(result).to.equal(false);
+        });
+        it('Test number type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.NUMBER);
+            expect(result).to.equal(0);
+        });
+        it('Test integer type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.INTEGER);
+            expect(result).to.equal(0);
+        });
+        it('Test string type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.STRING);
+            expect(result).to.equal('');
+        });
+        it('Test null type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.NULL);
+            expect(result).to.equal(null);
+        });
+        it('Test object type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.OBJECT);
+            expect(result).to.deep.equal({});
+        });
+        it('Test array type', () => {
+            const result = Utils.getDefaultValue(ValueTypeEnum.ARRAY);
+            expect(result).to.deep.equal([]);
         });
     });
 });
