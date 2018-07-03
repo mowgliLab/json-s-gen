@@ -1,0 +1,17 @@
+{
+  "params": [
+    {
+      "first": 1,
+      "second": "bonjour",
+      "third": "tadaa"
+    }, {
+      "first": 2,
+      "second": "bonjour2",
+      "third": "tadaa2"
+    }, {
+      "first": 3,
+      "second": "bonjour3",
+      "third": "tadaa3"
+    }
+  ]
+}

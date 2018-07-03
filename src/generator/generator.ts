@@ -1,11 +1,12 @@
 import { GeneratorOptionsModel } from './models/generator-options.model';
+import { Draf7SchemaModel } from './models/schema.model';
+import { Compiler } from './compiler';
 
 export class Generator {
-    private jsonModel: any;
     private generatorOptions: GeneratorOptionsModel;
 
-    constructor(generatorOptions: GeneratorOptionsModel) {
-        this.generatorOptions = generatorOptions;
+    constructor(generatorOptions?: GeneratorOptionsModel) {
+        this.generatorOptions = generatorOptions || new GeneratorOptionsModel();
     }
 
     getSchemaFromDatas(data: any): any {
@@ -29,5 +30,9 @@ export class Generator {
         } else {
             return this.getSchemaFromDatas(param);
         }
+    }
+
+    private compile(jsonModel: any): Draf7SchemaModel {
+        return Compiler.compile(jsonModel);
     }
 }

@@ -2,7 +2,6 @@ import { AbstractSyntaxTreeModel } from './models/abstract-syntax-tree.model';
 import { Draf7SchemaModel } from './models/schema.model';
 import { ValueTypeEnum } from './enums/value-type.enum';
 import { Utils } from './utils';
-import * as _ from 'lodash';
 
 export class Compiler {
 
@@ -28,7 +27,6 @@ export class Compiler {
                 uniqueItems: true,
                 items: []
             };
-            // TODO : Manage unique object or array of objects
             Compiler.compileChild(tree, schema.properties, schema);
         }
 
@@ -49,12 +47,7 @@ export class Compiler {
                 properties[k] = Compiler.getObjectPart(Compiler.getId(parentSchema, k, keys.length), child);
                 Compiler.compileChild(child, properties[k].properties, properties[k]);
             } else if (child.type === ValueTypeEnum.ARRAY) {
-                properties[k] = <Draf7SchemaModel> {
-                    '$id': Compiler.getId(parentSchema, k, keys.length),
-                    type: child.type,
-                    uniqueItems: child.uniqueItems,
-                    items: []
-                };
+                properties[k] = Compiler.getArrayPart(Compiler.getId(parentSchema, k, keys.length), child);
                 Compiler.compileChild(child, properties[k].items, properties[k]);
                 if (Object.keys(properties[k].items).length === 1) {
                     properties[k].items = properties[k].items[0];
@@ -81,7 +74,7 @@ export class Compiler {
         return result;
     }
 
-    private static getObjectPart(id: string, child: AbstractSyntaxTreeModel) {
+    private static getObjectPart(id: string, child: AbstractSyntaxTreeModel): Draf7SchemaModel {
         let schema = <Draf7SchemaModel> {
             '$id': id,
             type: child.type
@@ -94,6 +87,15 @@ export class Compiler {
             };
         }
         return schema;
+    }
+
+    private static getArrayPart(id: string, child: AbstractSyntaxTreeModel): Draf7SchemaModel {
+        return <Draf7SchemaModel> {
+            '$id': id,
+            type: child.type,
+            uniqueItems: child.uniqueItems,
+            items: []
+        };
     }
 
     private static getId(parentSchema: Draf7SchemaModel, key: string, length: number): string {

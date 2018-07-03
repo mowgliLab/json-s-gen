@@ -66,8 +66,8 @@ describe('#Utils', () => {
         });
     });
 
-    describe('isEqualWithout(obj1, obj2, ...omitValues', () => {
-        it('Should test comparator of ast without values', () => {
+    describe('isEqualWithout(obj1, obj2, ...omitValues)', () => {
+        it('Should compare object without "values" (false)', () => {
             const obj1 = {
                 "children": {
                     "firstname": {
@@ -111,83 +111,190 @@ describe('#Utils', () => {
             const result = Utils.isEqualWithout(obj1, obj2, 'values');
             expect(result).to.be.equal(false);
         });
-        it('Should test comparator of ast without values', () => {
+        it('Should compare object without "values" (true)', () => {
+            const obj1 = {
+                "children": {
+                    "firstname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Marcel"
+                        ]
+                    },
+                    "lastname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Durant"
+                        ]
+                    }
+                },
+                "required": true,
+                "type": "object"
+            };
+            const obj2 = {
+                "children": {
+                    "firstname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Marceline"
+                        ]
+                    },
+                    "lastname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Durant"
+                        ]
+                    }
+                },
+                "required": true,
+                "type": "object"
+            };
+            const result = Utils.isEqualWithout(obj1, obj2, 'values');
+            expect(result).to.be.equal(true);
+        });
+        it('Should compare object with "values" (false)', () => {
+            const obj1 = {
+                "children": {
+                    "firstname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Marcel"
+                        ]
+                    },
+                    "lastname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Durant"
+                        ]
+                    }
+                },
+                "required": true,
+                "type": "object"
+            };
+            const obj2 = {
+                "children": {
+                    "firstname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Marceline"
+                        ]
+                    },
+                    "lastname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Durant"
+                        ]
+                    }
+                },
+                "required": true,
+                "type": "object"
+            };
+            const result = Utils.isEqualWithout(obj1, obj2);
+            expect(result).to.be.equal(false);
+        });
+        it('Should compare object with "values" (true)', () => {
+            const obj1 = {
+                "children": {
+                    "firstname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Marcel"
+                        ]
+                    },
+                    "lastname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Durant"
+                        ]
+                    }
+                },
+                "required": true,
+                "type": "object"
+            };
+            const obj2 = {
+                "children": {
+                    "firstname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Marcel"
+                        ]
+                    },
+                    "lastname": {
+                        "required": true,
+                        "type": "string",
+                        "values": [
+                            "Durant"
+                        ]
+                    }
+                },
+                "required": true,
+                "type": "object"
+            };
+            const result = Utils.isEqualWithout(obj1, obj2);
+            expect(result).to.be.equal(true);
+        });
+        it('Should compare two strings (false)', () => {
             const obj1 = 'hello';
             const obj2 = 'world';
             const result = Utils.isEqualWithout(obj1, obj2, 'values');
             expect(result).to.be.equal(false);
         });
-        it('Should test comparator of ast without values', () => {
-            const obj = {
-                "0": {
-                    "children": {
-                        "firstname": {
-                            "required": true,
-                            "type": "string",
-                            "values": [
-                                "Marcel"
-                            ]
-                        },
-                        "lastname": {
-                            "required": true,
-                            "type": "string",
-                            "values": [
-                                "Durant"
-                            ]
-                        }
-                    },
-                    "required": true,
-                    "type": "object"
-                },
-                "1": {
-                    "children": {
-                        "firstname": {
-                            "required": true,
-                            "type": "string",
-                            "values": [
-                                "Marceline"
-                            ]
-                        },
-                        "lastname": {
-                            "required": true,
-                            "type": "string",
-                            "values": [
-                                "Durant"
-                            ]
-                        }
-                    },
-                    "required": true,
-                    "type": "object"
-                }
-            };
-            const result = Utils.isEqualWithout(obj['0'], obj['1'], 'values');
-            expect(result).to.be.equal(true);
-        });
-        it('Should test comparator of ast without values', () => {
+        it('Should compare two strings (true)', () => {
             const obj1 = 'hello';
             const obj2 = 'hello';
             const result = Utils.isEqualWithout(obj1, obj2, 'values');
             expect(result).to.be.equal(true);
         });
-        it('Should test comparator of ast without values', () => {
+        it('Should compare two simple objects values (false)', () => {
             const obj1 = {
-                prop1: 'hello'
+                prop1: 'hello1',
+                values: [
+                    'velo',
+                    'voiture',
+                    'camion'
+                ]
             };
             const obj2 = {
-                prop1: 'hello'
-            };
-            const result = Utils.isEqualWithout(obj1, obj2, 'values');
-            expect(result).to.be.equal(true);
-        });
-        it('Should test comparator of ast without values', () => {
-            const obj1 = {
-                prop1: 'hello'
-            };
-            const obj2 = {
-                prop1: 'world'
+                prop1: 'hello2',
+                values: [
+                    'bicycle',
+                    'car',
+                    'truck'
+                ]
             };
             const result = Utils.isEqualWithout(obj1, obj2, 'values');
             expect(result).to.be.equal(false);
+        });
+        it('Should compare two simple objects values (true)', () => {
+            const obj1 = {
+                prop1: 'hello',
+                values: [
+                    'velo',
+                    'voiture',
+                    'camion'
+                ]
+            };
+            const obj2 = {
+                prop1: 'hello',
+                values: [
+                    'bicycle',
+                    'car',
+                    'truck'
+                ],
+                default: 'truck'
+            };
+            const result = Utils.isEqualWithout(obj1, obj2, 'values', 'default');
+            expect(result).to.be.equal(true);
         });
     });
 });

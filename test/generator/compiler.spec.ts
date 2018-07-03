@@ -512,34 +512,31 @@ describe('`#Compiler', () => {
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
-        it('shoud return part of schema for empty array');
-        // it('shoud return part of schema for empty array', () => {
-        //     const key = 'emptyObject';
-        //     ast.children[key] = {
-        //         "type": "object",
-        //         "required": false,
-        //         "children": {}
-        //     };
-        //
-        //     const assert = {
-        //         '$id': `/properties/parent/properties/tags`,
-        //         "type": "array",
-        //         "items": {
-        //             "$id": "/properties/parent/properties/tagsNonUniq/items",
-        //             "type": "string",
-        //             "title": "The 0 Schema ",
-        //             "default": "",
-        //             "examples": [
-        //                 "home",
-        //                 "green"
-        //             ]
-        //         },
-        //         "uniqueItems": false
-        //     };
-        //
-        //     Compiler.compileChild(ast, parentSchema.properties, parentSchema);
-        //     expect(parentSchema.properties[key]).to.deep.equal(assert);
-        //     expect(parentSchema.required).to.contains(key);
-        // });
+        it('shoud return part of schema for empty array', () => {
+            const key = 'emptyObject';
+            ast.children[key] = {
+                type: 'array',
+                required: false,
+                children: {},
+                uniqueItems: true
+            };
+
+            const assert = {
+                '$id': `/properties/parent/properties/emptyObject`,
+                "type": "array",
+                "items": [],
+                "uniqueItems": true
+            };
+
+            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            expect(parentSchema.properties[key]).to.deep.equal(assert);
+            expect(parentSchema.required).not.to.contains(key);
+        });
     });
+
+    it('Should test getId');
+    it('Should test getArrayPart');
+    it('Should test getObjectPart');
+    it('Should test getPimitivePart');
+    it('Should test compile');
 });

@@ -119,6 +119,17 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
             const result = AbstractSyntaxTreeBuilder.buildArray(ModelProvider.getJSONData().etherogene);
             expect(result).to.deep.equal(ModelProvider.getEtherogeneAST());
         });
+        it('Should return empty array tree', () => {
+            const assert = {
+                type: 'array',
+                required: false,
+                children: {},
+                uniqueItems: true
+            };
+            const result = AbstractSyntaxTreeBuilder.buildArray(ModelProvider.getJSONData().emptyArray);
+            expect(result).to.deep.equal(assert);
+        });
+
     });
 
 

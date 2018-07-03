@@ -5,16 +5,6 @@ import { AbstractSyntaxTreeModel } from './models/abstract-syntax-tree.model';
 
 export class AbstractSyntaxTreeBuilder {
 
-    private tree: any;
-
-    private constructor() {
-        this.tree = {};
-    }
-
-    static buildTree(jsonModel: any) {
-
-    }
-
     static buildPrimitive(node: any): AbstractSyntaxTreeModel {
         const type = Utils.getType(node);
         const required = type === ValueTypeEnum.STRING ? !!node : true;

@@ -23,6 +23,7 @@ export class ModelProvider {
                 "green",
                 "home"
             ],
+            "emptyArray": [],
             "guests": [
                 {
                     "firstname": "Marcel",
