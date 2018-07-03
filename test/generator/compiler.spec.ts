@@ -4,6 +4,7 @@ import { Compiler } from '../../src/generator/compiler';
 import { Draf7SchemaModel } from '../../src/generator/models/schema.model';
 import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 import { AbstractSyntaxTreeModel } from '../../src/generator/models/abstract-syntax-tree.model';
+import { ModelProvider } from './utils/model-provider';
 
 describe('`#Compiler', () => {
 
@@ -534,9 +535,56 @@ describe('`#Compiler', () => {
         });
     });
 
-    it('Should test getId');
-    it('Should test getArrayPart');
-    it('Should test getObjectPart');
-    it('Should test getPimitivePart');
-    it('Should test compile');
+    describe('compile(tree)', () => {
+        it('should return a schema(1) (object)', () => {
+            const ast = ModelProvider.getDimensionsAST();
+            const assert = ModelProvider.getDimensionsSchema();
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should return a schema(2) (complex object)', () => {
+            const ast = ModelProvider.getPersonAST();
+            const assert = ModelProvider.getPersonSchema();
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should return a schema(3) (array)', () => {
+            const ast = ModelProvider.getTagsAST();
+            const assert = ModelProvider.getTagsSchema();
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should return a schema(3) (duplicate strings array)', () => {
+            const ast = ModelProvider.getTagsNonUniqAST();
+            const assert = ModelProvider.getTagsNonUniqSchema();
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should return a schema(3) (etherogene array)', () => {
+            const ast = ModelProvider.getEtherogeneAST();
+            const assert = ModelProvider.getEtherogeneSchema();
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
+
+
+        it('passing invalid AST');
+        //     const ast = ModelProvider.getDimensionsAST();
+        //     const assert = ModelProvider.getDimensionsSchema();
+        //     const result = Compiler.compile(ast);
+        //     expect(result).to.deep.equal(assert);
+        // });
+        it('passing AST for empty object');
+        //     const ast = ModelProvider.getDimensionsAST();
+        //     const assert = ModelProvider.getDimensionsSchema();
+        //     const result = Compiler.compile(ast);
+        //     expect(result).to.deep.equal(assert);
+        // });
+        it('passing AST for empty array');
+        //     const ast = ModelProvider.getDimensionsAST();
+        //     const assert = ModelProvider.getDimensionsSchema();
+        //     const result = Compiler.compile(ast);
+        //     expect(result).to.deep.equal(assert);
+        // });
+    });
 });

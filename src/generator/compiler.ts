@@ -24,10 +24,13 @@ export class Compiler {
         } else {
             schema = {
                 ...schema,
-                uniqueItems: true,
+                uniqueItems: tree.uniqueItems,
                 items: []
             };
-            Compiler.compileChild(tree, schema.properties, schema);
+            Compiler.compileChild(tree, schema.items, schema);
+            if (Object.keys(schema.items).length === 1) {
+                schema.items = schema.items[0];
+            }
         }
 
 

@@ -84,7 +84,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
     describe('buildObject(node)', () => {
         it('Should return object tree', () => {
             const result = AbstractSyntaxTreeBuilder.buildObject(ModelProvider.getJSONData().dimensions);
-            expect(result).to.deep.equal(ModelProvider.getDimensionsASTt());
+            expect(result).to.deep.equal(ModelProvider.getDimensionsAST());
         });
         it('Should return object tree', () => {
             const result = AbstractSyntaxTreeBuilder.buildObject(ModelProvider.getJSONData().person);
@@ -136,7 +136,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
     describe('buildNode(node)', () => {
         it('Should return object tree', () => {
             const result = AbstractSyntaxTreeBuilder.buildNode(ModelProvider.getJSONData().dimensions);
-            expect(result).to.deep.equal(ModelProvider.getDimensionsASTt());
+            expect(result).to.deep.equal(ModelProvider.getDimensionsAST());
         });
         it('Should return string primitive', () => {
             const assert = {
