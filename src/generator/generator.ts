@@ -1,6 +1,7 @@
 import { GeneratorOptionsModel } from './models/generator-options.model';
 import { Draf7SchemaModel } from './models/schema.model';
 import { Compiler } from './compiler';
+import { AbstractSyntaxTreeBuilder } from './abstract-synthax-tree-builder';
 
 export class Generator {
     private generatorOptions: GeneratorOptionsModel;
@@ -28,11 +29,12 @@ export class Generator {
         if (typeof param === 'string') {
             return this.getSchemaFromPath(param);
         } else {
-            return this.getSchemaFromDatas(param);
+            return this.compile(param);
         }
     }
 
     private compile(jsonModel: any): Draf7SchemaModel {
-        return Compiler.compile(jsonModel);
+        const ast = AbstractSyntaxTreeBuilder.buildNode(jsonModel);
+        return Compiler.compile(ast);
     }
 }

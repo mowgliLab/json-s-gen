@@ -567,24 +567,42 @@ describe('`#Compiler', () => {
             expect(result).to.deep.equal(assert);
         });
 
-
-        it('passing invalid AST');
-        //     const ast = ModelProvider.getDimensionsAST();
-        //     const assert = ModelProvider.getDimensionsSchema();
-        //     const result = Compiler.compile(ast);
-        //     expect(result).to.deep.equal(assert);
-        // });
-        it('passing AST for empty object');
-        //     const ast = ModelProvider.getDimensionsAST();
-        //     const assert = ModelProvider.getDimensionsSchema();
-        //     const result = Compiler.compile(ast);
-        //     expect(result).to.deep.equal(assert);
-        // });
-        it('passing AST for empty array');
-        //     const ast = ModelProvider.getDimensionsAST();
-        //     const assert = ModelProvider.getDimensionsSchema();
-        //     const result = Compiler.compile(ast);
-        //     expect(result).to.deep.equal(assert);
-        // });
+        it('passing AST for empty object', () => {
+            const ast = {
+                type: 'object',
+                required: false,
+                children: {}
+            };
+            const assert = {
+                "$id": "http://example.com/example.json",
+                "type": "object",
+                "definitions": {},
+                "description": "root of schema",
+                "properties": {},
+                "required": [],
+                "$schema": "http://json-schema.org/draft-07/schema#"
+            };
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
+        it('passing AST for empty array', () => {
+            const ast = {
+                type: 'array',
+                required: false,
+                children: {},
+                uniqueItems: true
+            };
+            const assert = {
+                "$id": "http://example.com/example.json",
+                "type": "array",
+                "definitions": {},
+                "description": "root of schema",
+                "items": [],
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "uniqueItems": true
+            };
+            const result = Compiler.compile(ast);
+            expect(result).to.deep.equal(assert);
+        });
     });
 });
