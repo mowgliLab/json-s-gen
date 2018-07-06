@@ -115,8 +115,101 @@ describe('#Generator', () => {
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
-        it('should schematise an array containing one sort of object');
-        it('should schematise an array containing arrays');
-        it('should schematise an array containing eterogene elements');
+        it('should schematise an array containing one sort of object', () => {
+            const assert = {
+                "$id": "http://example.com/example.json",
+                "type": "array",
+                "definitions": {},
+                "description": "root of schema",
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "items": {
+                    "$id": "/items",
+                    "type": "object",
+                    "properties": {
+                        "firstname": {
+                            "$id": "/items/properties/firstname",
+                            "type": "string",
+                            "title": "The firstname Schema ",
+                            "default": "",
+                            "examples": [
+                                "Marcel"
+                            ]
+                        },
+                        "lastname": {
+                            "$id": "/items/properties/lastname",
+                            "type": "string",
+                            "title": "The lastname Schema ",
+                            "default": "",
+                            "examples": [
+                                "Durant"
+                            ]
+                        }
+                    },
+                    "required": [
+                        "firstname",
+                        "lastname"
+                    ]
+                },
+                "uniqueItems": true
+            };
+            const jsonModel = ModelProvider.getJSONData().guests;
+            const result = generator.getSchema(jsonModel);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should schematise an array containing arrays', () => {
+            const assert = {
+                "$id": "http://example.com/example.json",
+                "type": "array",
+                "definitions": {},
+                "description": "root of schema",
+                "$schema": "http://json-schema.org/draft-07/schema#",
+                "items": [
+                    {
+                        "$id": "/items/0",
+                        "type": "array",
+                        "items": {
+                            "$id": "/items/0/items",
+                            "type": "string",
+                            "title": "The 0 Schema ",
+                            "default": "",
+                            "examples": [
+                                "red",
+                                "blue",
+                                "green",
+                                "white"
+                            ]
+                        },
+                        "uniqueItems": true
+                    },
+                    {
+                        "$id": "/items/1",
+                        "type": "array",
+                        "items": {
+                            "$id": "/items/1/items",
+                            "type": "integer",
+                            "title": "The 0 Schema ",
+                            "default": 0,
+                            "examples": [
+                                2,
+                                3,
+                                5,
+                                7,
+                                11
+                            ]
+                        },
+                        "uniqueItems": true
+                    }
+                ],
+                "uniqueItems": true
+            };
+            const jsonModel = [
+                ["red", "blue", "green", "white"],
+                ["car", "truck", "airplane"],
+                [2, 3, 5, 7, 11]
+            ];
+            const result = generator.getSchema(jsonModel);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should schematise an array containing etherogene elements');
     });
 });
