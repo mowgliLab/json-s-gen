@@ -10,7 +10,7 @@ export class Generator {
         this.generatorOptions = generatorOptions || new GeneratorOptionsModel();
     }
 
-    getSchemaFromDatas(data: any): any {
+    /**getSchemaFromDatas(data: any): any {
         console.log('Will return a JSON schema from data.');
         return null;
     }
@@ -23,11 +23,12 @@ export class Generator {
     getSchemaFromUrl(url: any): any {
         console.log('Will return a JSON schema from url.');
         return null;
-    }
+    }**/
 
     getSchema(param: string | any): any {
         if (typeof param === 'string') {
-            return this.getSchemaFromPath(param);
+            // return this.getSchemaFromPath(param);
+            throw new Error('functionality not implemented yet');
         } else {
             return this.compile(param);
         }

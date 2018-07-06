@@ -8,8 +8,8 @@ describe('#Generator', () => {
     //     const result = new Generator({test: 'voila'});
     //     expect(result).to.instanceOf(new Generator({test: 'voila'}));
     // })
-    it('Should create a Generator');
-    it('Should test the generator on simple String object.');
+    it('new Generator(options)');
+    it('getSchema(pathToJson)');
 
     describe('getSchema(jsonModel)', () => {
         let generator: Generator;
@@ -210,6 +210,11 @@ describe('#Generator', () => {
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
-        it('should schematise an array containing etherogene elements');
+        it('should schematise an array containing etherogene elements', () => {
+            const assert = ModelProvider.getEtherogeneSchema();
+            const jsonModel = ModelProvider.getJSONData().etherogene;
+            const result = generator.getSchema(jsonModel);
+            expect(result).to.deep.equal(assert);
+        });
     });
 });
