@@ -1,6 +1,6 @@
 {
   "name": "json-s-generator",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "JSON schema generator writen in TypeScript supporting from JSON Schema draft-07.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
