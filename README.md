@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/mowgliLab/json-s-gen.svg?branch=master)](https://travis-ci.org/mowgliLab/json-s-gen)
+[![Coverage Status](https://coveralls.io/repos/github/mowgliLab/json-s-gen/badge.svg?branch=master)](https://coveralls.io/github/mowgliLab/json-s-gen?branch=master)
+
 # JSON S Generator
 
 A generator of JSON schema in TypeScript.
