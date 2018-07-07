@@ -16,10 +16,12 @@
     "JSON",
     "schema",
     "generator",
-    "JSON schema"
+    "JSON schema",
+    "draft-07",
+    "typescript"
   ],
   "author": "Alain Daussin <mowglilab@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/mowgliLab/json-s-gen/issues"
   },
