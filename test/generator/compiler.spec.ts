@@ -200,7 +200,8 @@ describe('`#Compiler', () => {
                         ]
                     }
                 },
-                required: ['street', 'number']
+                "required": ['street', 'number'],
+                "additionalProperties": false
             };
 
             Compiler.compileChild(ast, parentSchema.properties, parentSchema);
@@ -304,10 +305,12 @@ describe('`#Compiler', () => {
                                 ]
                             }
                         },
-                        required: ['street', 'number']
+                        "required": ['street', 'number'],
+                        "additionalProperties": false
                     }
                 },
-                required: ['firstname', 'lastname', 'address']
+                "required": ['firstname', 'lastname', 'address'],
+                "additionalProperties": false
             };
 
             Compiler.compileChild(ast, parentSchema.properties, parentSchema);
@@ -503,7 +506,8 @@ describe('`#Compiler', () => {
                         "required": [
                             "firstname",
                             "lastname"
-                        ]
+                        ],
+                        "additionalProperties": false
                     }
                 ],
                 "uniqueItems": true
@@ -580,6 +584,7 @@ describe('`#Compiler', () => {
                 "description": "root of schema",
                 "properties": {},
                 "required": [],
+                "additionalProperties": false,
                 "$schema": "http://json-schema.org/draft-07/schema#"
             };
             const result = Compiler.compile(ast);

@@ -41,4 +41,5 @@ export interface Draf7SchemaModel {
     minProperties?: number;
     properties?: any;
     required?: string[];
+    additionalProperties?: boolean;
 }

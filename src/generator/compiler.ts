@@ -18,7 +18,8 @@ export class Compiler {
             schema = {
                 ...schema,
                 properties: {},
-                required: []
+                required: [],
+                additionalProperties: false
             };
             Compiler.compileChild(tree, schema.properties, schema);
         } else {
@@ -86,7 +87,8 @@ export class Compiler {
             schema = {
                 ...schema,
                 properties: {},
-                required: []
+                required: [],
+                additionalProperties: false
             };
         }
         return schema;

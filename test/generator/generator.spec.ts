@@ -93,7 +93,8 @@ describe('#Generator', () => {
                     "colors",
                     "vehicles",
                     "primeNbrs"
-                ]
+                ],
+                "additionalProperties": false
             };
             const jsonModel = {
                 "colors": ["red", "blue", "green", "white"],
@@ -148,7 +149,8 @@ describe('#Generator', () => {
                     "required": [
                         "firstname",
                         "lastname"
-                    ]
+                    ],
+                    "additionalProperties": false
                 },
                 "uniqueItems": true
             };

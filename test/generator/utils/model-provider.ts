@@ -90,7 +90,8 @@ export class ModelProvider {
                 "id",
                 "name",
                 "price"
-            ]
+            ],
+            "additionalProperties": false
         };
     }
     public static getJSONData(): any {
@@ -328,7 +329,8 @@ export class ModelProvider {
             "required": [
                 "width",
                 "height"
-            ]
+            ],
+            "additionalProperties": false
         };
     }
 
@@ -385,14 +387,16 @@ export class ModelProvider {
                     "required": [
                         "street",
                         "number"
-                    ]
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
                 "firstname",
                 "lastname",
                 "address"
-            ]
+            ],
+            "additionalProperties": false
         };
     }
 
@@ -500,7 +504,8 @@ export class ModelProvider {
                     "required": [
                         "firstname",
                         "lastname"
-                    ]
+                    ],
+                    "additionalProperties": false
                 }
             ],
             "uniqueItems": true
@@ -550,7 +555,8 @@ export class ModelProvider {
                     "required": [
                         "width",
                         "height"
-                    ]
+                    ],
+                    "additionalProperties": false
                 },
                 "emptyObject": {
                     "$id": "/properties/emptyObject",
@@ -676,7 +682,8 @@ export class ModelProvider {
                         "required": [
                             "firstname",
                             "lastname"
-                        ]
+                        ],
+                        "additionalProperties": false
                     },
                     "uniqueItems": true
                 },
@@ -737,7 +744,8 @@ export class ModelProvider {
                             "required": [
                                 "firstname",
                                 "lastname"
-                            ]
+                            ],
+                            "additionalProperties": false
                         }
                     ],
                     "uniqueItems": true
@@ -790,14 +798,16 @@ export class ModelProvider {
                             "required": [
                                 "street",
                                 "number"
-                            ]
+                            ],
+                            "additionalProperties": false
                         }
                     },
                     "required": [
                         "firstname",
                         "lastname",
                         "address"
-                    ]
+                    ],
+                    "additionalProperties": false
                 }
             },
             "required": [
@@ -813,7 +823,8 @@ export class ModelProvider {
                 "guests",
                 "etherogene",
                 "person"
-            ]
+            ],
+            "additionalProperties": false
         };
     }
 
