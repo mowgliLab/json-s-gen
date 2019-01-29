@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Compiler } from '../../src/generator/compiler';
-import { Draf7SchemaModel } from '../../src/generator/models/schema.model';
+import { Draft7SchemaModel } from '../../src/generator/models/schema.model';
 import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 import { AbstractSyntaxTreeModel } from '../../src/generator/models/abstract-syntax-tree.model';
 import { ModelProvider } from './utils/model-provider';
@@ -11,7 +11,7 @@ describe('`#Compiler', () => {
     describe('primitive part compileChile(tree, properties, parentSchema)', () => {
 
         let ast: AbstractSyntaxTreeModel;
-        let parentSchema: Draf7SchemaModel;
+        let parentSchema: Draft7SchemaModel;
 
         beforeEach(() => {
             ast = {
@@ -142,7 +142,7 @@ describe('`#Compiler', () => {
     describe('object part compileChild(tree, properties, parentSchema)', () => {
 
         let ast: AbstractSyntaxTreeModel;
-        let parentSchema: Draf7SchemaModel;
+        let parentSchema: Draft7SchemaModel;
 
         beforeEach(() => {
             ast = {
@@ -322,7 +322,7 @@ describe('`#Compiler', () => {
     describe('array part compileChild(tree, properties, parentSchema)', () => {
 
         let ast: AbstractSyntaxTreeModel;
-        let parentSchema: Draf7SchemaModel;
+        let parentSchema: Draft7SchemaModel;
 
         beforeEach(() => {
             ast = {

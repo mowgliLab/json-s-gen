@@ -1,5 +1,5 @@
 import { GeneratorOptionsModel } from './models/generator-options.model';
-import { Draf7SchemaModel } from './models/schema.model';
+import { Draft7SchemaModel } from './models/schema.model';
 import { Compiler } from './compiler';
 import { AbstractSyntaxTreeBuilder } from './abstract-synthax-tree-builder';
 
@@ -34,7 +34,7 @@ export class Generator {
         }
     }
 
-    private compile(jsonModel: any): Draf7SchemaModel {
+    private compile(jsonModel: any): Draft7SchemaModel {
         const ast = AbstractSyntaxTreeBuilder.buildNode(jsonModel);
         return Compiler.compile(ast);
     }

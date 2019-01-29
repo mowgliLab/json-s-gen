@@ -1,4 +1,4 @@
-export interface Draf7SchemaModel {
+export interface Draft7SchemaModel {
     // root properties
     '$schema'?: string;
     definitions?: any;

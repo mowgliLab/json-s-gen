@@ -1,12 +1,12 @@
 import { AbstractSyntaxTreeModel } from './models/abstract-syntax-tree.model';
-import { Draf7SchemaModel } from './models/schema.model';
+import { Draft7SchemaModel } from './models/schema.model';
 import { ValueTypeEnum } from './enums/value-type.enum';
 import { Utils } from './utils';
 
 export class Compiler {
 
-    public static compile(tree: AbstractSyntaxTreeModel): Draf7SchemaModel {
-        let schema = <Draf7SchemaModel>{
+    public static compile(tree: AbstractSyntaxTreeModel): Draft7SchemaModel {
+        let schema = <Draft7SchemaModel>{
             '$id': 'http://example.com/example.json',
             '$schema': 'http://json-schema.org/draft-07/schema#',
             type: tree.type,
@@ -38,7 +38,7 @@ export class Compiler {
         return schema;
     }
 
-    public static compileChild(tree: any, properties: any, parentSchema: Draf7SchemaModel) {
+    public static compileChild(tree: any, properties: any, parentSchema: Draft7SchemaModel) {
         const keys = Object.keys(tree.children);
         keys.forEach((k) => {
             const child = tree.children[k];
@@ -57,14 +57,14 @@ export class Compiler {
                     properties[k].items = properties[k].items[0];
                 }
             } else {
-                properties[k] = Compiler.getPimitivePart(Compiler.getId(parentSchema, k, keys.length), child, k);
+                properties[k] = Compiler.getPrimitivePart(Compiler.getId(parentSchema, k, keys.length), child, k);
             }
         })
     }
 
-    private static getPimitivePart(id: string, child: AbstractSyntaxTreeModel, k: string): Draf7SchemaModel {
+    private static getPrimitivePart(id: string, child: AbstractSyntaxTreeModel, k: string): Draft7SchemaModel {
         // TODO : Manage all options
-        const result = <Draf7SchemaModel> {
+        const result = <Draft7SchemaModel> {
             '$id': id,
             type: child.type,
             title: `The ${k} Schema `,
@@ -78,8 +78,8 @@ export class Compiler {
         return result;
     }
 
-    private static getObjectPart(id: string, child: AbstractSyntaxTreeModel): Draf7SchemaModel {
-        let schema = <Draf7SchemaModel> {
+    private static getObjectPart(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel {
+        let schema = <Draft7SchemaModel> {
             '$id': id,
             type: child.type
         };
@@ -94,8 +94,8 @@ export class Compiler {
         return schema;
     }
 
-    private static getArrayPart(id: string, child: AbstractSyntaxTreeModel): Draf7SchemaModel {
-        return <Draf7SchemaModel> {
+    private static getArrayPart(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel {
+        return <Draft7SchemaModel> {
             '$id': id,
             type: child.type,
             uniqueItems: child.uniqueItems,
@@ -103,7 +103,7 @@ export class Compiler {
         };
     }
 
-    private static getId(parentSchema: Draf7SchemaModel, key: string, length: number): string {
+    private static getId(parentSchema: Draft7SchemaModel, key: string, length: number): string {
         const parentId = parentSchema.$id[0] === '/' ? parentSchema.$id : '';
         if (parentSchema.type === ValueTypeEnum.ARRAY) {
             if (length > 1) {

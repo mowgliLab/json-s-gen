@@ -1,4 +1,4 @@
-import { Draf7SchemaModel } from '../../../src/generator/models/schema.model';
+import { Draft7SchemaModel } from '../../../src/generator/models/schema.model';
 
 export class ModelProvider {
 
@@ -6,7 +6,7 @@ export class ModelProvider {
         return ["red", "green", "blue", "yellow", "purple", "white"];
     }
     
-    public static getSimpleArraySchema(): Draf7SchemaModel {
+    public static getSimpleArraySchema(): Draft7SchemaModel {
         return {
             "$id": "http://example.com/example.json",
             "type": "array",
@@ -40,7 +40,7 @@ export class ModelProvider {
         };
     }
 
-    public static getSimpleJSONSchema(): Draf7SchemaModel {
+    public static getSimpleJSONSchema(): Draft7SchemaModel {
         return {
             "$id": "http://example.com/example.json",
             "type": "object",
@@ -512,7 +512,7 @@ export class ModelProvider {
         };
     }
 
-    public static getJSONDataSchema(): Draf7SchemaModel {
+    public static getJSONDataSchema(): Draft7SchemaModel {
         return {
             "$id": "http://example.com/example.json",
             "type": "object",

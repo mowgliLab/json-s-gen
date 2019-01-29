@@ -65,7 +65,7 @@ export class AbstractSyntaxTreeBuilder {
      * @param node
      * @return {AbstractSyntaxTreeModel}
      */
-    static buildNode(node: any) {
+    static buildNode(node: any): AbstractSyntaxTreeModel {
         const type = Utils.getType(node);
 
         if (type === ValueTypeEnum.OBJECT) {
