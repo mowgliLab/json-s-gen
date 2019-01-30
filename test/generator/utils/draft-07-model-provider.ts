@@ -1,6 +1,6 @@
 import { Draft7SchemaModel } from '../../../src/generator/models/draft-schema/draft7schema.model';
 
-export class Draft7modelProvider {
+export class Draft07ModelProvider {
 
     public static getSimpleArray(): Array<any> {
         return ["red", "green", "blue", "yellow", "purple", "white"];
@@ -620,7 +620,7 @@ export class Draft7modelProvider {
                     "$id": "#/properties/tags",
                     "type": "array",
                     "items": {
-                        "$id": "/properties/tags/items",
+                        "$id": "#/properties/tags/items",
                         "type": "string",
                         "title": "The 0 Schema ",
                         "default": "",

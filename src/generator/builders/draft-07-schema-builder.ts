@@ -3,7 +3,7 @@ import {Draft7SchemaModel} from "../models/draft-schema/draft7schema.model";
 import {AbstractSyntaxTreeModel} from "../models/abstract-syntax-tree.model";
 import {Utils} from "../utils";
 
-export class Draft7SchemaBuilder extends SchemaBuilder{
+export class Draft07SchemaBuilder extends SchemaBuilder{
     getArrayNode(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel {
         return <Draft7SchemaModel> {
             '$id': id,

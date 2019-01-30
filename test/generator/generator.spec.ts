@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe,it } from 'mocha';
 import { Generator } from '../../src/generator';
-import { Draft7modelProvider } from './utils/draft7model-provider';
+import { Draft07ModelProvider } from './utils/draft-07-model-provider';
 
 describe('#Generator', () => {
     // it('Should create a generator', () => {
@@ -18,14 +18,14 @@ describe('#Generator', () => {
         });
 
         it('should schematise a basic objet with one level of simple properties.', () => {
-            const assert = Draft7modelProvider.getSimpleJSONSchema();
-            const jsonModel = Draft7modelProvider.getSimpleJSON();
+            const assert = Draft07ModelProvider.getSimpleJSONSchema();
+            const jsonModel = Draft07ModelProvider.getSimpleJSON();
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
         it('should schematise an object containing another object', () => {
-            const assert = Draft7modelProvider.getPersonSchema();
-            const jsonModel = Draft7modelProvider.getJSONData().person;
+            const assert = Draft07ModelProvider.getPersonSchema();
+            const jsonModel = Draft07ModelProvider.getJSONData().person;
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
@@ -38,10 +38,10 @@ describe('#Generator', () => {
                 "$schema": "http://json-schema.org/draft-07/schema#",
                 "properties": {
                     "colors": {
-                        "$id": "/properties/colors",
+                        "$id": "#/properties/colors",
                         "type": "array",
                         "items": {
-                            "$id": "/properties/colors/items",
+                            "$id": "#/properties/colors/items",
                             "type": "string",
                             "title": "The 0 Schema ",
                             "default": "",
@@ -55,10 +55,10 @@ describe('#Generator', () => {
                         "uniqueItems": true
                     },
                     "vehicles": {
-                        "$id": "/properties/vehicles",
+                        "$id": "#/properties/vehicles",
                         "type": "array",
                         "items": {
-                            "$id": "/properties/vehicles/items",
+                            "$id": "#/properties/vehicles/items",
                             "type": "string",
                             "title": "The 0 Schema ",
                             "default": "",
@@ -71,10 +71,10 @@ describe('#Generator', () => {
                         "uniqueItems": true
                     },
                     "primeNbrs": {
-                        "$id": "/properties/primeNbrs",
+                        "$id": "#/properties/primeNbrs",
                         "type": "array",
                         "items": {
-                            "$id": "/properties/primeNbrs/items",
+                            "$id": "#/properties/primeNbrs/items",
                             "type": "integer",
                             "title": "The 0 Schema ",
                             "default": 0,
@@ -105,14 +105,14 @@ describe('#Generator', () => {
             expect(result).to.deep.equal(assert);
         });
         it('should schematise the big object', () => {
-            const assert = Draft7modelProvider.getJSONDataSchema();
-            const jsonModel = Draft7modelProvider.getJSONData();
+            const assert = Draft07ModelProvider.getJSONDataSchema();
+            const jsonModel = Draft07ModelProvider.getJSONData();
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
         it('should schematise a basic homogene array with one level of simple properties.', () => {
-            const assert = Draft7modelProvider.getSimpleArraySchema();
-            const jsonModel = Draft7modelProvider.getSimpleArray();
+            const assert = Draft07ModelProvider.getSimpleArraySchema();
+            const jsonModel = Draft07ModelProvider.getSimpleArray();
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
@@ -124,11 +124,11 @@ describe('#Generator', () => {
                 "description": "root of schema",
                 "$schema": "http://json-schema.org/draft-07/schema#",
                 "items": {
-                    "$id": "/items",
+                    "$id": "#/items",
                     "type": "object",
                     "properties": {
                         "firstname": {
-                            "$id": "/items/properties/firstname",
+                            "$id": "#/items/properties/firstname",
                             "type": "string",
                             "title": "The firstname Schema ",
                             "default": "",
@@ -137,7 +137,7 @@ describe('#Generator', () => {
                             ]
                         },
                         "lastname": {
-                            "$id": "/items/properties/lastname",
+                            "$id": "#/items/properties/lastname",
                             "type": "string",
                             "title": "The lastname Schema ",
                             "default": "",
@@ -154,7 +154,7 @@ describe('#Generator', () => {
                 },
                 "uniqueItems": true
             };
-            const jsonModel = Draft7modelProvider.getJSONData().guests;
+            const jsonModel = Draft07ModelProvider.getJSONData().guests;
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
@@ -167,10 +167,10 @@ describe('#Generator', () => {
                 "$schema": "http://json-schema.org/draft-07/schema#",
                 "items": [
                     {
-                        "$id": "/items/0",
+                        "$id": "#/items/0",
                         "type": "array",
                         "items": {
-                            "$id": "/items/0/items",
+                            "$id": "#/items/0/items",
                             "type": "string",
                             "title": "The 0 Schema ",
                             "default": "",
@@ -184,10 +184,10 @@ describe('#Generator', () => {
                         "uniqueItems": true
                     },
                     {
-                        "$id": "/items/1",
+                        "$id": "#/items/1",
                         "type": "array",
                         "items": {
-                            "$id": "/items/1/items",
+                            "$id": "#/items/1/items",
                             "type": "integer",
                             "title": "The 0 Schema ",
                             "default": 0,
@@ -213,8 +213,8 @@ describe('#Generator', () => {
             expect(result).to.deep.equal(assert);
         });
         it('should schematise an array containing etherogene elements', () => {
-            const assert = Draft7modelProvider.getEtherogeneSchema();
-            const jsonModel = Draft7modelProvider.getJSONData().etherogene;
+            const assert = Draft07ModelProvider.getEtherogeneSchema();
+            const jsonModel = Draft07ModelProvider.getJSONData().etherogene;
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });

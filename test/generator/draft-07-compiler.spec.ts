@@ -4,14 +4,14 @@ import { Compiler } from '../../src/generator/compiler';
 import { Draft7SchemaModel } from '../../src/generator/models/draft-schema/draft7schema.model';
 import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 import { AbstractSyntaxTreeModel } from '../../src/generator/models/abstract-syntax-tree.model';
-import { Draft7modelProvider } from './utils/draft7model-provider';
-import {Draft7SchemaBuilder} from "../../src/generator/builders/Draft7SchemaBuilder";
+import { Draft07ModelProvider } from './utils/draft-07-model-provider';
+import {Draft07SchemaBuilder} from "../../src/generator/builders/draft-07-schema-builder";
 
 describe('`#Draft7Compiler', () => {
 
     let compiler: Compiler;
     beforeEach(() => {
-        const schemaBuilder = new Draft7SchemaBuilder(null);
+        const schemaBuilder = new Draft07SchemaBuilder(null);
         compiler = new Compiler(schemaBuilder);
     });
 
@@ -548,32 +548,32 @@ describe('`#Draft7Compiler', () => {
 
     describe('compile(tree)', () => {
         it('should return a schema(1) (object)', () => {
-            const ast = Draft7modelProvider.getDimensionsAST();
-            const assert = Draft7modelProvider.getDimensionsSchema();
+            const ast = Draft07ModelProvider.getDimensionsAST();
+            const assert = Draft07ModelProvider.getDimensionsSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(2) (complex object)', () => {
-            const ast = Draft7modelProvider.getPersonAST();
-            const assert = Draft7modelProvider.getPersonSchema();
+            const ast = Draft07ModelProvider.getPersonAST();
+            const assert = Draft07ModelProvider.getPersonSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (array)', () => {
-            const ast = Draft7modelProvider.getTagsAST();
-            const assert = Draft7modelProvider.getTagsSchema();
+            const ast = Draft07ModelProvider.getTagsAST();
+            const assert = Draft07ModelProvider.getTagsSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (duplicate strings array)', () => {
-            const ast = Draft7modelProvider.getTagsNonUniqAST();
-            const assert = Draft7modelProvider.getTagsNonUniqSchema();
+            const ast = Draft07ModelProvider.getTagsNonUniqAST();
+            const assert = Draft07ModelProvider.getTagsNonUniqSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (etherogene array)', () => {
-            const ast = Draft7modelProvider.getEtherogeneAST();
-            const assert = Draft7modelProvider.getEtherogeneSchema();
+            const ast = Draft07ModelProvider.getEtherogeneAST();
+            const assert = Draft07ModelProvider.getEtherogeneSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });

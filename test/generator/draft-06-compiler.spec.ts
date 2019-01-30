@@ -3,15 +3,15 @@ import { describe, it } from 'mocha';
 import { Compiler } from '../../src/generator/compiler';
 import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 import { AbstractSyntaxTreeModel } from '../../src/generator/models/abstract-syntax-tree.model';
-import {Draft6SchemaBuilder} from "../../src/generator/builders/Draft6SchemaBuilder";
+import {Draft06SchemaBuilder} from "../../src/generator/builders/draft-06-schema-builder";
 import {Draft6schemaModel} from "../../src/generator/models/draft-schema/draft6schema.model";
-import {Draft6modelProvider} from "./utils/draft6model-provider";
+import {Draft06ModelProvider} from "./utils/draft-06-model-provider";
 
 describe('`#Draft6Compiler', () => {
 
     let compiler: Compiler;
     beforeEach(() => {
-        const schemaBuilder = new Draft6SchemaBuilder(null);
+        const schemaBuilder = new Draft06SchemaBuilder(null);
         compiler = new Compiler(schemaBuilder);
     });
 
@@ -548,32 +548,32 @@ describe('`#Draft6Compiler', () => {
 
     describe('compile(tree)', () => {
         it('should return a schema(1) (object)', () => {
-            const ast = Draft6modelProvider.getDimensionsAST();
-            const assert = Draft6modelProvider.getDimensionsSchema();
+            const ast = Draft06ModelProvider.getDimensionsAST();
+            const assert = Draft06ModelProvider.getDimensionsSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(2) (complex object)', () => {
-            const ast = Draft6modelProvider.getPersonAST();
-            const assert = Draft6modelProvider.getPersonSchema();
+            const ast = Draft06ModelProvider.getPersonAST();
+            const assert = Draft06ModelProvider.getPersonSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (array)', () => {
-            const ast = Draft6modelProvider.getTagsAST();
-            const assert = Draft6modelProvider.getTagsSchema();
+            const ast = Draft06ModelProvider.getTagsAST();
+            const assert = Draft06ModelProvider.getTagsSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (duplicate strings array)', () => {
-            const ast = Draft6modelProvider.getTagsNonUniqAST();
-            const assert = Draft6modelProvider.getTagsNonUniqSchema();
+            const ast = Draft06ModelProvider.getTagsNonUniqAST();
+            const assert = Draft06ModelProvider.getTagsNonUniqSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (etherogene array)', () => {
-            const ast = Draft6modelProvider.getEtherogeneAST();
-            const assert = Draft6modelProvider.getEtherogeneSchema();
+            const ast = Draft06ModelProvider.getEtherogeneAST();
+            const assert = Draft06ModelProvider.getEtherogeneSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });

@@ -1,6 +1,6 @@
 import { Draft6schemaModel } from '../../../src/generator/models/draft-schema/draft6schema.model';
 
-export class Draft6modelProvider {
+export class Draft06ModelProvider {
 
     public static getSimpleArray(): Array<any> {
         return ["red", "green", "blue", "yellow", "purple", "white"];

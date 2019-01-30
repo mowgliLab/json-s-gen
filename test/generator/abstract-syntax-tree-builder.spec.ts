@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { AbstractSyntaxTreeBuilder } from '../../src/generator/abstract-synthax-tree-builder';
-import { Draft7modelProvider } from './utils/draft7model-provider';
+import { Draft07ModelProvider } from './utils/draft-07-model-provider';
 
 describe('`#AbstractSyntaxTreeBuilder', () => {
 
@@ -12,7 +12,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: ["A green door"]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().name);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().name);
             expect(result).to.deep.equal(assert);
         });
         it('Should return non required string primitive', () => {
@@ -21,7 +21,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: false,
                 values: [""]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().emptyName);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().emptyName);
             expect(result).to.deep.equal(assert);
         });
         it('Should return number primitive', () => {
@@ -30,7 +30,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [12.5]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().price);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().price);
             expect(result).to.deep.equal(assert);
         });
         it('Should return negative number primitive', () => {
@@ -39,7 +39,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [-12.5]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(-Draft7modelProvider.getJSONData().price);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(-Draft07ModelProvider.getJSONData().price);
             expect(result).to.deep.equal(assert);
         });
         it('Should return integer primitive', () => {
@@ -48,7 +48,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [5]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().dimensions.width);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().dimensions.width);
             expect(result).to.deep.equal(assert);
         });
         it('Should return zero integer primitive', () => {
@@ -57,7 +57,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [0]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().freePrice);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().freePrice);
             expect(result).to.deep.equal(assert);
         });
         it('Should return boolean primitive', () => {
@@ -66,7 +66,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [false]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().checked);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().checked);
             expect(result).to.deep.equal(assert);
         });
         it('Should return null primitive', () => {
@@ -75,7 +75,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [null]
             };
-            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft7modelProvider.getJSONData().nullValue);
+            const result = AbstractSyntaxTreeBuilder.buildPrimitive(Draft07ModelProvider.getJSONData().nullValue);
             expect(result).to.deep.equal(assert);
         });
     });
@@ -83,12 +83,12 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
 
     describe('buildObject(node)', () => {
         it('Should return object tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildObject(Draft7modelProvider.getJSONData().dimensions);
-            expect(result).to.deep.equal(Draft7modelProvider.getDimensionsAST());
+            const result = AbstractSyntaxTreeBuilder.buildObject(Draft07ModelProvider.getJSONData().dimensions);
+            expect(result).to.deep.equal(Draft07ModelProvider.getDimensionsAST());
         });
         it('Should return object tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildObject(Draft7modelProvider.getJSONData().person);
-            expect(result).to.deep.equal(Draft7modelProvider.getPersonAST());
+            const result = AbstractSyntaxTreeBuilder.buildObject(Draft07ModelProvider.getJSONData().person);
+            expect(result).to.deep.equal(Draft07ModelProvider.getPersonAST());
         });
         it('Should return empty object tree', () => {
             const assert = {
@@ -96,7 +96,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: false,
                 children: {}
             };
-            const result = AbstractSyntaxTreeBuilder.buildObject(Draft7modelProvider.getJSONData().emptyObject);
+            const result = AbstractSyntaxTreeBuilder.buildObject(Draft07ModelProvider.getJSONData().emptyObject);
             expect(result).to.deep.equal(assert);
         });
     });
@@ -104,20 +104,20 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
 
     describe('buildArray(node)', () => {
         it('Should return string array tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildArray(Draft7modelProvider.getJSONData().tags);
-            expect(result).to.deep.equal(Draft7modelProvider.getTagsAST());
+            const result = AbstractSyntaxTreeBuilder.buildArray(Draft07ModelProvider.getJSONData().tags);
+            expect(result).to.deep.equal(Draft07ModelProvider.getTagsAST());
         });
         it('Should return string non unique array tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildArray(Draft7modelProvider.getJSONData().tagsNonUniq);
-            expect(result).to.deep.equal(Draft7modelProvider.getTagsNonUniqAST());
+            const result = AbstractSyntaxTreeBuilder.buildArray(Draft07ModelProvider.getJSONData().tagsNonUniq);
+            expect(result).to.deep.equal(Draft07ModelProvider.getTagsNonUniqAST());
         });
         it('Should return object array tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildArray(Draft7modelProvider.getJSONData().guests);
-            expect(result).to.deep.equal(Draft7modelProvider.getGuestsAST());
+            const result = AbstractSyntaxTreeBuilder.buildArray(Draft07ModelProvider.getJSONData().guests);
+            expect(result).to.deep.equal(Draft07ModelProvider.getGuestsAST());
         });
         it('Should return etherogene array tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildArray(Draft7modelProvider.getJSONData().etherogene);
-            expect(result).to.deep.equal(Draft7modelProvider.getEtherogeneAST());
+            const result = AbstractSyntaxTreeBuilder.buildArray(Draft07ModelProvider.getJSONData().etherogene);
+            expect(result).to.deep.equal(Draft07ModelProvider.getEtherogeneAST());
         });
         it('Should return empty array tree', () => {
             const assert = {
@@ -126,7 +126,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 children: {},
                 uniqueItems: true
             };
-            const result = AbstractSyntaxTreeBuilder.buildArray(Draft7modelProvider.getJSONData().emptyArray);
+            const result = AbstractSyntaxTreeBuilder.buildArray(Draft07ModelProvider.getJSONData().emptyArray);
             expect(result).to.deep.equal(assert);
         });
 
@@ -135,8 +135,8 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
 
     describe('buildNode(node)', () => {
         it('Should return object tree', () => {
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().dimensions);
-            expect(result).to.deep.equal(Draft7modelProvider.getDimensionsAST());
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().dimensions);
+            expect(result).to.deep.equal(Draft07ModelProvider.getDimensionsAST());
         });
         it('Should return string primitive', () => {
             const assert = {
@@ -144,7 +144,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: ['A green door']
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().name);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().name);
             expect(result).to.deep.equal(assert);
         });
         it('Should return non required string primitive', () => {
@@ -153,7 +153,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: false,
                 values: ['']
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().emptyName);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().emptyName);
             expect(result).to.deep.equal(assert);
         });
         it('Should return number primitive', () => {
@@ -162,7 +162,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [12.5]
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().price);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().price);
             expect(result).to.deep.equal(assert);
         });
         it('Should return negative number primitive', () => {
@@ -171,7 +171,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [-12.5]
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(-Draft7modelProvider.getJSONData().price);
+            const result = AbstractSyntaxTreeBuilder.buildNode(-Draft07ModelProvider.getJSONData().price);
             expect(result).to.deep.equal(assert);
         });
         it('Should return integer primitive', () => {
@@ -180,7 +180,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [5]
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().dimensions.width);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().dimensions.width);
             expect(result).to.deep.equal(assert);
         });
         it('Should return zero integer primitive', () => {
@@ -189,7 +189,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [0]
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().freePrice);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().freePrice);
             expect(result).to.deep.equal(assert);
         });
         it('Should return boolean primitive', () => {
@@ -198,7 +198,7 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [false]
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().checked);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().checked);
             expect(result).to.deep.equal(assert);
         });
         it('Should return null primitive', () => {
@@ -207,14 +207,14 @@ describe('`#AbstractSyntaxTreeBuilder', () => {
                 required: true,
                 values: [null]
             };
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData().nullValue);
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData().nullValue);
             expect(result).to.deep.equal(assert);
         });
     });
 
     describe('test full object tree', () => {
         it('#test', () => {
-            const result = AbstractSyntaxTreeBuilder.buildNode(Draft7modelProvider.getJSONData());
+            const result = AbstractSyntaxTreeBuilder.buildNode(Draft07ModelProvider.getJSONData());
             console.log(JSON.stringify(result));
         });
     });
