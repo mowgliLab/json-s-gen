@@ -1,18 +1,18 @@
-import { Draft7SchemaModel } from '../../../src/generator/models/draft-schema/draft7schema.model';
+import { Draft6schemaModel } from '../../../src/generator/models/draft-schema/draft6schema.model';
 
-export class Draft7modelProvider {
+export class Draft6modelProvider {
 
     public static getSimpleArray(): Array<any> {
         return ["red", "green", "blue", "yellow", "purple", "white"];
     }
     
-    public static getSimpleArraySchema(): Draft7SchemaModel {
+    public static getSimpleArraySchema(): Draft6schemaModel {
         return {
             "$id": "http://example.com/example.json",
             "type": "array",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "items": {
                 "$id": "#/items",
                 "type": "string",
@@ -40,13 +40,13 @@ export class Draft7modelProvider {
         };
     }
 
-    public static getSimpleJSONSchema(): Draft7SchemaModel {
+    public static getSimpleJSONSchema(): Draft6schemaModel {
         return {
             "$id": "http://example.com/example.json",
             "type": "object",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "properties": {
                 "checked": {
                     "$id": "#/properties/checked",
@@ -305,7 +305,7 @@ export class Draft7modelProvider {
             "type": "object",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "properties": {
                 "width": {
                     "$id": "#/properties/width",
@@ -341,7 +341,7 @@ export class Draft7modelProvider {
             "type": "object",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "properties": {
                 "firstname": {
                     "$id": "#/properties/firstname",
@@ -406,7 +406,7 @@ export class Draft7modelProvider {
             "type": "array",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "items": {
                 "$id": "#/items",
                 "type": "string",
@@ -427,7 +427,7 @@ export class Draft7modelProvider {
             "type": "array",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "items": {
                 "$id": "#/items",
                 "type": "string",
@@ -449,7 +449,7 @@ export class Draft7modelProvider {
             "type": "array",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "items": [
                 {
                     "$id": "#/items/0",
@@ -512,13 +512,13 @@ export class Draft7modelProvider {
         };
     }
 
-    public static getJSONDataSchema(): Draft7SchemaModel {
+    public static getJSONDataSchema(): Draft6schemaModel {
         return {
             "$id": "http://example.com/example.json",
             "type": "object",
             "definitions": {},
             "description": "root of schema",
-            "$schema": "http://json-schema.org/draft-07/schema#",
+            "$schema": "http://json-schema.org/draft-06/schema#",
             "properties": {
                 "checked": {
                     "$id": "#/properties/checked",
@@ -620,7 +620,7 @@ export class Draft7modelProvider {
                     "$id": "#/properties/tags",
                     "type": "array",
                     "items": {
-                        "$id": "/properties/tags/items",
+                        "$id": "#/properties/tags/items",
                         "type": "string",
                         "title": "The 0 Schema ",
                         "default": "",

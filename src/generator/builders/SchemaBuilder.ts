@@ -10,7 +10,7 @@ export abstract class SchemaBuilder {
     }
 
     public getId(parentSchema: SchemaModel, key: string, length: number): string {
-        const parentId = parentSchema.$id[0] === '/' ? parentSchema.$id : '';
+        const parentId = parentSchema.$id[0] === '#' ? parentSchema.$id : '#';
         if (parentSchema.type === ValueTypeEnum.ARRAY) {
             if (length > 1) {
                 return `${parentId}/items/${key}`;

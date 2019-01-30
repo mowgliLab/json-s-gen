@@ -1,24 +1,24 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Compiler } from '../../src/generator/compiler';
-import { Draft7SchemaModel } from '../../src/generator/models/draft-schema/draft7schema.model';
 import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 import { AbstractSyntaxTreeModel } from '../../src/generator/models/abstract-syntax-tree.model';
-import { Draft7modelProvider } from './utils/draft7model-provider';
-import {Draft7SchemaBuilder} from "../../src/generator/builders/Draft7SchemaBuilder";
+import {Draft6SchemaBuilder} from "../../src/generator/builders/Draft6SchemaBuilder";
+import {Draft6schemaModel} from "../../src/generator/models/draft-schema/draft6schema.model";
+import {Draft6modelProvider} from "./utils/draft6model-provider";
 
-describe('`#Draft7Compiler', () => {
+describe('`#Draft6Compiler', () => {
 
     let compiler: Compiler;
     beforeEach(() => {
-        const schemaBuilder = new Draft7SchemaBuilder(null);
+        const schemaBuilder = new Draft6SchemaBuilder(null);
         compiler = new Compiler(schemaBuilder);
     });
 
     describe('primitive part compileChile(tree, properties, parentSchema)', () => {
 
         let ast: AbstractSyntaxTreeModel;
-        let parentSchema: Draft7SchemaModel;
+        let parentSchema: Draft6schemaModel;
 
         beforeEach(() => {
             ast = {
@@ -149,7 +149,7 @@ describe('`#Draft7Compiler', () => {
     describe('object part compileChild(tree, properties, parentSchema)', () => {
 
         let ast: AbstractSyntaxTreeModel;
-        let parentSchema: Draft7SchemaModel;
+        let parentSchema: Draft6schemaModel;
 
         beforeEach(() => {
             ast = {
@@ -329,7 +329,7 @@ describe('`#Draft7Compiler', () => {
     describe('array part compileChild(tree, properties, parentSchema)', () => {
 
         let ast: AbstractSyntaxTreeModel;
-        let parentSchema: Draft7SchemaModel;
+        let parentSchema: Draft6schemaModel;
 
         beforeEach(() => {
             ast = {
@@ -548,32 +548,32 @@ describe('`#Draft7Compiler', () => {
 
     describe('compile(tree)', () => {
         it('should return a schema(1) (object)', () => {
-            const ast = Draft7modelProvider.getDimensionsAST();
-            const assert = Draft7modelProvider.getDimensionsSchema();
+            const ast = Draft6modelProvider.getDimensionsAST();
+            const assert = Draft6modelProvider.getDimensionsSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(2) (complex object)', () => {
-            const ast = Draft7modelProvider.getPersonAST();
-            const assert = Draft7modelProvider.getPersonSchema();
+            const ast = Draft6modelProvider.getPersonAST();
+            const assert = Draft6modelProvider.getPersonSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (array)', () => {
-            const ast = Draft7modelProvider.getTagsAST();
-            const assert = Draft7modelProvider.getTagsSchema();
+            const ast = Draft6modelProvider.getTagsAST();
+            const assert = Draft6modelProvider.getTagsSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (duplicate strings array)', () => {
-            const ast = Draft7modelProvider.getTagsNonUniqAST();
-            const assert = Draft7modelProvider.getTagsNonUniqSchema();
+            const ast = Draft6modelProvider.getTagsNonUniqAST();
+            const assert = Draft6modelProvider.getTagsNonUniqSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (etherogene array)', () => {
-            const ast = Draft7modelProvider.getEtherogeneAST();
-            const assert = Draft7modelProvider.getEtherogeneSchema();
+            const ast = Draft6modelProvider.getEtherogeneAST();
+            const assert = Draft6modelProvider.getEtherogeneSchema();
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
@@ -592,7 +592,7 @@ describe('`#Draft7Compiler', () => {
                 "properties": {},
                 "required": [],
                 "additionalProperties": false,
-                "$schema": "http://json-schema.org/draft-07/schema#"
+                "$schema": "http://json-schema.org/draft-06/schema#"
             };
             const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
@@ -610,7 +610,7 @@ describe('`#Draft7Compiler', () => {
                 "definitions": {},
                 "description": "root of schema",
                 "items": [],
-                "$schema": "http://json-schema.org/draft-07/schema#",
+                "$schema": "http://json-schema.org/draft-06/schema#",
                 "uniqueItems": true
             };
             const result = compiler.compile(ast);
