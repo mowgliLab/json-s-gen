@@ -1,11 +1,8 @@
-export interface Draft7SchemaModel {
-    // root properties
-    '$schema'?: string;
-    definitions?: any;
+import {SchemaModel} from "./schema.model";
+
+export class Draft7SchemaModel extends SchemaModel {
 
     // any types properties
-    '$id': string;
-    type: string | string[];
     enum?: any[];
     const?: any;
 
@@ -30,16 +27,11 @@ export interface Draft7SchemaModel {
     pattern?: string;
 
     // array properties
-    items?: any | any[];
     maxItems?: number;
     minItems?: number;
-    uniqueItems?: boolean;
     contains?: any;
 
     // object properties
     maxProperties?: number;
     minProperties?: number;
-    properties?: any;
-    required?: string[];
-    additionalProperties?: boolean;
 }

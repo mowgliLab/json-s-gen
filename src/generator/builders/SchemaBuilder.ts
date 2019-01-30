@@ -1,6 +1,6 @@
-import {Draft7SchemaModel} from "../models/draft-schema/draft7schema.model";
 import {AbstractSyntaxTreeModel} from "../models/abstract-syntax-tree.model";
 import {ValueTypeEnum} from "../enums/value-type.enum";
+import {SchemaModel} from "../models/draft-schema/schema.model";
 
 export abstract class SchemaBuilder {
     private options: any;
@@ -9,7 +9,7 @@ export abstract class SchemaBuilder {
         this.options = options;
     }
 
-    public getId(parentSchema: Draft7SchemaModel, key: string, length: number): string {
+    public getId(parentSchema: SchemaModel, key: string, length: number): string {
         const parentId = parentSchema.$id[0] === '/' ? parentSchema.$id : '';
         if (parentSchema.type === ValueTypeEnum.ARRAY) {
             if (length > 1) {
@@ -22,8 +22,8 @@ export abstract class SchemaBuilder {
         }
     }
 
-    abstract getPrimitiveNode(id: string, child: AbstractSyntaxTreeModel, key: string): Draft7SchemaModel;
-    abstract getObjectNode(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel;
-    abstract getArrayNode(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel;
-    abstract getRootNode(tree: AbstractSyntaxTreeModel): Draft7SchemaModel;
+    abstract getPrimitiveNode(id: string, child: AbstractSyntaxTreeModel, key: string): SchemaModel;
+    abstract getObjectNode(id: string, child: AbstractSyntaxTreeModel): SchemaModel;
+    abstract getArrayNode(id: string, child: AbstractSyntaxTreeModel): SchemaModel;
+    abstract getRootNode(tree: AbstractSyntaxTreeModel): SchemaModel;
 }

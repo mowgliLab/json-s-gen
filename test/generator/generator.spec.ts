@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { describe,it } from 'mocha';
 import { Generator } from '../../src/generator';
-import { ModelProvider } from './utils/model-provider';
+import { Draft7modelProvider } from './utils/draft7model-provider';
 
 describe('#Generator', () => {
     // it('Should create a generator', () => {
@@ -18,14 +18,14 @@ describe('#Generator', () => {
         });
 
         it('should schematise a basic objet with one level of simple properties.', () => {
-            const assert = ModelProvider.getSimpleJSONSchema();
-            const jsonModel = ModelProvider.getSimpleJSON();
+            const assert = Draft7modelProvider.getSimpleJSONSchema();
+            const jsonModel = Draft7modelProvider.getSimpleJSON();
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
         it('should schematise an object containing another object', () => {
-            const assert = ModelProvider.getPersonSchema();
-            const jsonModel = ModelProvider.getJSONData().person;
+            const assert = Draft7modelProvider.getPersonSchema();
+            const jsonModel = Draft7modelProvider.getJSONData().person;
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
@@ -105,14 +105,14 @@ describe('#Generator', () => {
             expect(result).to.deep.equal(assert);
         });
         it('should schematise the big object', () => {
-            const assert = ModelProvider.getJSONDataSchema();
-            const jsonModel = ModelProvider.getJSONData();
+            const assert = Draft7modelProvider.getJSONDataSchema();
+            const jsonModel = Draft7modelProvider.getJSONData();
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
         it('should schematise a basic homogene array with one level of simple properties.', () => {
-            const assert = ModelProvider.getSimpleArraySchema();
-            const jsonModel = ModelProvider.getSimpleArray();
+            const assert = Draft7modelProvider.getSimpleArraySchema();
+            const jsonModel = Draft7modelProvider.getSimpleArray();
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
@@ -154,7 +154,7 @@ describe('#Generator', () => {
                 },
                 "uniqueItems": true
             };
-            const jsonModel = ModelProvider.getJSONData().guests;
+            const jsonModel = Draft7modelProvider.getJSONData().guests;
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
@@ -213,8 +213,8 @@ describe('#Generator', () => {
             expect(result).to.deep.equal(assert);
         });
         it('should schematise an array containing etherogene elements', () => {
-            const assert = ModelProvider.getEtherogeneSchema();
-            const jsonModel = ModelProvider.getJSONData().etherogene;
+            const assert = Draft7modelProvider.getEtherogeneSchema();
+            const jsonModel = Draft7modelProvider.getJSONData().etherogene;
             const result = generator.getSchema(jsonModel);
             expect(result).to.deep.equal(assert);
         });
