@@ -1,12 +1,19 @@
 import { expect } from 'chai';
 import { describe, it } from 'mocha';
 import { Compiler } from '../../src/generator/compiler';
-import { Draft7SchemaModel } from '../../src/generator/models/schema.model';
+import { Draft7SchemaModel } from '../../src/generator/models/draft-schema/draft7schema.model';
 import { ValueTypeEnum } from '../../src/generator/enums/value-type.enum';
 import { AbstractSyntaxTreeModel } from '../../src/generator/models/abstract-syntax-tree.model';
 import { ModelProvider } from './utils/model-provider';
+import {Draft7SchemaBuilder} from "../../src/generator/builders/Draft7SchemaBuilder";
 
 describe('`#Compiler', () => {
+
+    let compiler: Compiler;
+    beforeEach(() => {
+        const schemaBuilder = new Draft7SchemaBuilder(null);
+        compiler = new Compiler(schemaBuilder);
+    });
 
     describe('primitive part compileChile(tree, properties, parentSchema)', () => {
 
@@ -45,7 +52,7 @@ describe('`#Compiler', () => {
                 ]
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -67,7 +74,7 @@ describe('`#Compiler', () => {
                 ]
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -89,7 +96,7 @@ describe('`#Compiler', () => {
                 ]
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -111,7 +118,7 @@ describe('`#Compiler', () => {
                 ]
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -133,7 +140,7 @@ describe('`#Compiler', () => {
                 ]
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -204,7 +211,7 @@ describe('`#Compiler', () => {
                 "additionalProperties": false
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -221,7 +228,7 @@ describe('`#Compiler', () => {
                 'type': 'object'
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.not.contains(key);
         });
@@ -313,7 +320,7 @@ describe('`#Compiler', () => {
                 "additionalProperties": false
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -369,7 +376,7 @@ describe('`#Compiler', () => {
                 "uniqueItems": true
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -404,7 +411,7 @@ describe('`#Compiler', () => {
                 "uniqueItems": false
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -513,7 +520,7 @@ describe('`#Compiler', () => {
                 "uniqueItems": true
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).to.contains(key);
         });
@@ -533,7 +540,7 @@ describe('`#Compiler', () => {
                 "uniqueItems": true
             };
 
-            Compiler.compileChild(ast, parentSchema.properties, parentSchema);
+            compiler.compileChild(ast, parentSchema.properties, parentSchema);
             expect(parentSchema.properties[key]).to.deep.equal(assert);
             expect(parentSchema.required).not.to.contains(key);
         });
@@ -543,31 +550,31 @@ describe('`#Compiler', () => {
         it('should return a schema(1) (object)', () => {
             const ast = ModelProvider.getDimensionsAST();
             const assert = ModelProvider.getDimensionsSchema();
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(2) (complex object)', () => {
             const ast = ModelProvider.getPersonAST();
             const assert = ModelProvider.getPersonSchema();
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (array)', () => {
             const ast = ModelProvider.getTagsAST();
             const assert = ModelProvider.getTagsSchema();
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (duplicate strings array)', () => {
             const ast = ModelProvider.getTagsNonUniqAST();
             const assert = ModelProvider.getTagsNonUniqSchema();
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('should return a schema(3) (etherogene array)', () => {
             const ast = ModelProvider.getEtherogeneAST();
             const assert = ModelProvider.getEtherogeneSchema();
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
 
@@ -587,7 +594,7 @@ describe('`#Compiler', () => {
                 "additionalProperties": false,
                 "$schema": "http://json-schema.org/draft-07/schema#"
             };
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
         it('passing AST for empty array', () => {
@@ -606,7 +613,7 @@ describe('`#Compiler', () => {
                 "$schema": "http://json-schema.org/draft-07/schema#",
                 "uniqueItems": true
             };
-            const result = Compiler.compile(ast);
+            const result = compiler.compile(ast);
             expect(result).to.deep.equal(assert);
         });
     });

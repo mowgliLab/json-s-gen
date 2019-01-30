@@ -1,18 +1,14 @@
 import { AbstractSyntaxTreeModel } from './models/abstract-syntax-tree.model';
-import { Draft7SchemaModel } from './models/schema.model';
+import { Draft7SchemaModel } from './models/draft-schema/draft7schema.model';
 import { ValueTypeEnum } from './enums/value-type.enum';
-import { Utils } from './utils';
+import {SchemaBuilder} from "./builders/SchemaBuilder";
 
 export class Compiler {
 
-    public static compile(tree: AbstractSyntaxTreeModel): Draft7SchemaModel {
-        let schema = <Draft7SchemaModel>{
-            '$id': 'http://example.com/example.json',
-            '$schema': 'http://json-schema.org/draft-07/schema#',
-            type: tree.type,
-            definitions: {},
-            description: 'root of schema'
-        };
+    constructor(private schemaBuilder: SchemaBuilder) { }
+
+    public compile(tree: AbstractSyntaxTreeModel): Draft7SchemaModel {
+        let schema = this.schemaBuilder.getRootNode(tree);
 
         if (tree.type === ValueTypeEnum.OBJECT) {
             schema = {
@@ -21,14 +17,14 @@ export class Compiler {
                 required: [],
                 additionalProperties: false
             };
-            Compiler.compileChild(tree, schema.properties, schema);
+            schema = this.compileChild(tree, schema.properties, schema);
         } else {
             schema = {
                 ...schema,
                 uniqueItems: tree.uniqueItems,
                 items: []
             };
-            Compiler.compileChild(tree, schema.items, schema);
+            schema = this.compileChild(tree, schema.items, schema);
             if (Object.keys(schema.items).length === 1) {
                 schema.items = schema.items[0];
             }
@@ -38,81 +34,31 @@ export class Compiler {
         return schema;
     }
 
-    public static compileChild(tree: any, properties: any, parentSchema: Draft7SchemaModel) {
+    public compileChild(tree: any, properties: any, parentSchema: Draft7SchemaModel): Draft7SchemaModel {
+        let rootSchema = Object.assign({}, parentSchema);
+
         const keys = Object.keys(tree.children);
         keys.forEach((k) => {
             const child = tree.children[k];
 
-            if (child.required && parentSchema.required) {
-                parentSchema.required.push(k);
+            if (child.required && rootSchema.required) {
+                rootSchema.required.push(k);
             }
 
             if (child.type === ValueTypeEnum.OBJECT) {
-                properties[k] = Compiler.getObjectPart(Compiler.getId(parentSchema, k, keys.length), child);
-                Compiler.compileChild(child, properties[k].properties, properties[k]);
+                properties[k] = this.schemaBuilder.getObjectNode(this.schemaBuilder.getId(rootSchema, k, keys.length), child);
+                properties[k] = this.compileChild(child, properties[k].properties, properties[k]);
             } else if (child.type === ValueTypeEnum.ARRAY) {
-                properties[k] = Compiler.getArrayPart(Compiler.getId(parentSchema, k, keys.length), child);
-                Compiler.compileChild(child, properties[k].items, properties[k]);
+                properties[k] = this.schemaBuilder.getArrayNode(this.schemaBuilder.getId(rootSchema, k, keys.length), child);
+                properties[k] = this.compileChild(child, properties[k].items, properties[k]);
                 if (Object.keys(properties[k].items).length === 1) {
                     properties[k].items = properties[k].items[0];
                 }
             } else {
-                properties[k] = Compiler.getPrimitivePart(Compiler.getId(parentSchema, k, keys.length), child, k);
+                properties[k] = this.schemaBuilder.getPrimitiveNode(this.schemaBuilder.getId(rootSchema, k, keys.length), child, k);
             }
-        })
-    }
+        });
 
-    private static getPrimitivePart(id: string, child: AbstractSyntaxTreeModel, k: string): Draft7SchemaModel {
-        // TODO : Manage all options
-        const result = <Draft7SchemaModel> {
-            '$id': id,
-            type: child.type,
-            title: `The ${k} Schema `,
-            default: Utils.getDefaultValue(child.type)
-        };
-
-        if (child.values && child.values.length > 0) {
-            result.examples = [...child.values];
-        }
-
-        return result;
-    }
-
-    private static getObjectPart(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel {
-        let schema = <Draft7SchemaModel> {
-            '$id': id,
-            type: child.type
-        };
-        if (Object.keys(child.children).length > 0) {
-            schema = {
-                ...schema,
-                properties: {},
-                required: [],
-                additionalProperties: false
-            };
-        }
-        return schema;
-    }
-
-    private static getArrayPart(id: string, child: AbstractSyntaxTreeModel): Draft7SchemaModel {
-        return <Draft7SchemaModel> {
-            '$id': id,
-            type: child.type,
-            uniqueItems: child.uniqueItems,
-            items: []
-        };
-    }
-
-    private static getId(parentSchema: Draft7SchemaModel, key: string, length: number): string {
-        const parentId = parentSchema.$id[0] === '/' ? parentSchema.$id : '';
-        if (parentSchema.type === ValueTypeEnum.ARRAY) {
-            if (length > 1) {
-                return `${parentId}/items/${key}`;
-            }else {
-                return`${parentId}/items`;
-            }
-        } else {
-            return `${parentId}/properties/${key}`;
-        }
+        return rootSchema;
     }
 }

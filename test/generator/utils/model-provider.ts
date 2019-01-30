@@ -1,4 +1,4 @@
-import { Draft7SchemaModel } from '../../../src/generator/models/schema.model';
+import { Draft7SchemaModel } from '../../../src/generator/models/draft-schema/draft7schema.model';
 
 export class ModelProvider {
 

@@ -1,4 +1,4 @@
-import { IDTypeEnum } from '../enums/id-type.enum';
+import { IDTypeEnum } from '../../enums/id-type.enum';
 
 export interface CommonOptions {
     // For validation

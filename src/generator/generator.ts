@@ -1,13 +1,16 @@
-import { GeneratorOptionsModel } from './models/generator-options.model';
-import { Draft7SchemaModel } from './models/schema.model';
+import { GeneratorOptionsModel } from './models/option/generator-options.model';
+import { Draft7SchemaModel } from './models/draft-schema/draft7schema.model';
 import { Compiler } from './compiler';
 import { AbstractSyntaxTreeBuilder } from './abstract-synthax-tree-builder';
+
+import { merge } from 'lodash';
+import {Draft7SchemaBuilder} from "./builders/Draft7SchemaBuilder";
 
 export class Generator {
     private generatorOptions: GeneratorOptionsModel;
 
     constructor(generatorOptions?: GeneratorOptionsModel) {
-        this.generatorOptions = generatorOptions || new GeneratorOptionsModel();
+        this.generatorOptions = merge(new GeneratorOptionsModel(), generatorOptions);
     }
 
     /**getSchemaFromDatas(data: any): any {
@@ -36,6 +39,8 @@ export class Generator {
 
     private compile(jsonModel: any): Draft7SchemaModel {
         const ast = AbstractSyntaxTreeBuilder.buildNode(jsonModel);
-        return Compiler.compile(ast);
+        const schemaBuilder = new Draft7SchemaBuilder(this.generatorOptions);
+        const compiler = new Compiler(schemaBuilder);
+        return compiler.compile(ast);
     }
 }

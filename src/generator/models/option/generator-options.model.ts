@@ -1,13 +1,17 @@
-import { CommonOptions } from './common-options.model';
-import { StringOptions } from './string-options.model';
-import { ObjectOptions } from './object-options.model';
-import { ArrayOptions } from './array-options.model';
-import { NumberOptions } from './number-options.model';
-import { IDTypeEnum } from '../enums/id-type.enum';
-import { RequiredEnum } from '../enums/required.enum';
-import { ArrayValidationTypeEnum } from '../enums/array-validation-type.enum';
+import {CommonOptions} from './common-options.model';
+import {StringOptions} from './string-options.model';
+import {ObjectOptions} from './object-options.model';
+import {ArrayOptions} from './array-options.model';
+import {NumberOptions} from './number-options.model';
+import {IDTypeEnum} from '../../enums/id-type.enum';
+import {RequiredEnum} from '../../enums/required.enum';
+import {ArrayValidationTypeEnum} from '../../enums/array-validation-type.enum';
+import {DraftVersionEnum} from "../../enums/draft-version.enum";
 
 export class GeneratorOptionsModel {
+
+    draftVersion: DraftVersionEnum;
+
     common: CommonOptions;
     objects: ObjectOptions;
     arrays: ArrayOptions;
@@ -15,6 +19,8 @@ export class GeneratorOptionsModel {
     numbers: NumberOptions;
 
     constructor() {
+        this.draftVersion = DraftVersionEnum.v7;
+
         this.common = this.getDefaultCommonOptions();
         this.objects = this.getDefaultObjectOptions();
         this.arrays = this.getDefaultArrayOptions();
