@@ -1,6 +1,11 @@
-import { RequiredEnum } from '../../enums/required.enum';
+import {RequiredEnum} from '../../enums/required.enum';
 
-export interface ObjectOptions {
+export class ObjectOptions {
     required: RequiredEnum;
     additionalProperties: boolean;
+
+    constructor() {
+        this.required = RequiredEnum.ifValue;
+        this.additionalProperties = true;
+    }
 }

@@ -1,6 +1,6 @@
-import { IDTypeEnum } from '../../enums/id-type.enum';
+import {IDTypeEnum} from '../../enums/id-type.enum';
 
-export interface CommonOptions {
+export class CommonOptions {
     // For validation
     inferEnums: boolean;
     inclNullAsType: boolean;
@@ -13,4 +13,17 @@ export interface CommonOptions {
     inferExamples: boolean;
     readOnly: boolean;
     writeOnly: boolean;
+
+    constructor() {
+        this.inferEnums = false;
+        this.inclNullAsType = false;
+        this.idType = IDTypeEnum.relative;
+        this.inferTitle = false;
+        this.inferDescription = false;
+        this.inferDefault = false;
+        this.inferExamples = false;
+        this.readOnly = false;
+        this.writeOnly = false;
+    }
+
 }

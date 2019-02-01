@@ -1,7 +1,9 @@
-import { expect } from 'chai';
-import { describe,it } from 'mocha';
-import { Generator } from '../../src/generator';
-import { Draft07ModelProvider } from './utils/draft-07-model-provider';
+import {expect} from 'chai';
+import {describe, it} from 'mocha';
+import {Generator} from '../../src/generator';
+import {Draft07ModelProvider} from './utils/draft-07-model-provider';
+import {Draft06ModelProvider} from "./utils/draft-06-model-provider";
+import {DraftVersionEnum} from "../../src/generator/enums/draft-version.enum";
 
 describe('#Generator', () => {
     // it('Should create a generator', () => {
@@ -21,6 +23,15 @@ describe('#Generator', () => {
             const assert = Draft07ModelProvider.getSimpleJSONSchema();
             const jsonModel = Draft07ModelProvider.getSimpleJSON();
             const result = generator.getSchema(jsonModel);
+            expect(result).to.deep.equal(assert);
+        });
+        it('should schematise a basic objet with one level of simple properties. (draft-06)', () => {
+            generator = new Generator({draftVersion: DraftVersionEnum.v6});
+
+            const assert = Draft06ModelProvider.getSimpleJSONSchema();
+            const jsonModel = Draft06ModelProvider.getSimpleJSON();
+            const result = generator.getSchema(jsonModel);
+
             expect(result).to.deep.equal(assert);
         });
         it('should schematise an object containing another object', () => {

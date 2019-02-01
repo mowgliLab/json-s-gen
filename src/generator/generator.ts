@@ -5,6 +5,7 @@ import { AbstractSyntaxTreeBuilder } from './abstract-synthax-tree-builder';
 
 import { merge } from 'lodash';
 import {Draft07SchemaBuilder} from "./builders/draft-07-schema-builder";
+import {SchemaBuilderFactory} from "./builders/schema-builder-factory";
 
 export class Generator {
     private generatorOptions: GeneratorOptionsModel;
@@ -39,7 +40,7 @@ export class Generator {
 
     private compile(jsonModel: any): Draft7SchemaModel {
         const ast = AbstractSyntaxTreeBuilder.buildNode(jsonModel);
-        const schemaBuilder = new Draft07SchemaBuilder(this.generatorOptions);
+        const schemaBuilder = SchemaBuilderFactory.getSchemaBuilder(this.generatorOptions);
         const compiler = new Compiler(schemaBuilder);
         return compiler.compile(ast);
     }

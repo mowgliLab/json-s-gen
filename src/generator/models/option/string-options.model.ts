@@ -1,5 +1,5 @@
 
-export interface StringOptions {
+export class StringOptions {
     minLength?: number;
     maxLength?: number;
 }
