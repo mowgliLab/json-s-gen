@@ -1,12 +1,16 @@
 import {AbstractSyntaxTreeModel} from "../models/abstract-syntax-tree.model";
 import {ValueTypeEnum} from "../enums/value-type.enum";
 import {SchemaModel} from "../models/draft-schema/schema.model";
+import {GeneratorOptionsModel} from "../models/option/generator-options.model";
 
 export abstract class SchemaBuilder {
-    private options: any;
+    private _options: GeneratorOptionsModel;
+    get options(): GeneratorOptionsModel {
+        return this._options;
+    }
 
     constructor(options: any) {
-        this.options = options;
+        this._options = options;
     }
 
     public getId(parentSchema: SchemaModel, key: string, length: number): string {

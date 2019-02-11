@@ -4,7 +4,6 @@ import { Compiler } from './compiler';
 import { AbstractSyntaxTreeBuilder } from './abstract-synthax-tree-builder';
 
 import { merge } from 'lodash';
-import {Draft07SchemaBuilder} from "./builders/draft-07-schema-builder";
 import {SchemaBuilderFactory} from "./builders/schema-builder-factory";
 
 export class Generator {
